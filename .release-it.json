@@ -10,7 +10,8 @@
   },
   "github": {
     "release": true,
-    "releaseNotes": "git log --no-merges --pretty=format:\"* %s %h\" ${latestTag}...main"
+    "releaseNotes": "git log --no-merges --pretty=format:\"* %s %h\" 10.0.0...11.0.0",
+    "assets": null
   },
   "npm": {
     "publish": false
