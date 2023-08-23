@@ -76,7 +76,7 @@ jobs:
             echo "Release Number: $release_number"
             git config user.email "v.anicicj@rasa.com"
             git config user.name "Vladimir Anicic"
-            npx release-it $release_number --yes --ci
+            npm run release $release_number --yes --ci
         env:
           GITHUB_TOKEN: ${{ secrets.GHA_TOKEN }}
           
