@@ -1,6 +1,6 @@
 {
   "name": "node-hello",
-  "version": "15.0.0-prepare-release",
+  "version": "15.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
