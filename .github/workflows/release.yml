@@ -1,0 +1,77 @@
+# This is a release workflow
+# Workflow dispatch will create 'relase/'' branch and make PR with main branch
+# Adding label 'release' on the PR will trigger relase-it
+# Release-it will pull the code from release brach, bump the version,
+# generate change-log, git commit, git tag, git push, and github create release
+
+name: Release workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      commitSHA:
+        description: 'Commit hash'
+        required: true
+      releaseNumber:
+        description: 'Release number'
+        required: true
+  pull_request:
+    types: [ labeled ]
+
+jobs:
+  workflow_dispatch_create_branch:
+    if: ${{ github.event_name == 'workflow_dispatch' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        
+        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
+        with:
+          ref: ${{ github.event.inputs.commitSHA }}
+
+      - name: Initialize Git user
+        run: |
+          git config --global user.email "v.anicic@rasa.com"
+          git config --global user.name "rasa-aadlv"
+      
+      - name: Prepare release
+        run: |
+          sed -i 's/"version": .*"/"version": "${{ github.event.inputs.releaseNumber }}-prepare-release"/g' package.json
+
+      - name: Commit and push the change
+        uses: devops-infra/action-commit-push@be5ba37125c79eb0016cbd8cc385f0aa160538c5
+        with:
+            github_token: ${{ secrets.GHA_TOKEN }}
+            commit_message: Prepare release ${{ github.event.inputs.releaseNumber }}
+            target_branch: release/${{ github.event.inputs.releaseNumber }}
+
+      - name: Create pull request
+        uses: devops-infra/action-pull-request@e66e2ba93519dc63b9884a26e620e2fd0cffab2c
+        with:
+          github_token: ${{ secrets.GHA_TOKEN }}
+          body: "**Automated pull request**"
+          title: Release ${{ github.event.inputs.releaseNumber }}
+
+      - name: Checkout Code
+        if: ${{ github.event.label.name == 'release' }}
+        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
+        with:
+          ref: ${{ github.event.inputs.commitSHA }}
+  release:
+    if: ${{ github.event.label.name == 'release' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install the dependencies
+        run: |
+          npm install -g release-it@16.1.2
+
+      - name: Run release
+        run: |
+            release_number=${GITHUB_HEAD_REF#release/}
+            echo "Release Number: $release_number"
+            git config user.email "v.anicicj@rasa.com"
+            git config user.name "Vladimir Anicic"
+            npx release-it $release_number --yes --ci
+        env:
+          GITHUB_TOKEN: ${{ secrets.GHA_TOKEN }}
+          
