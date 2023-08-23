@@ -10,7 +10,6 @@
   },
   "github": {
     "release": true,
-    "web": true,
     "autoGenerate": true
   },
   "npm": {
