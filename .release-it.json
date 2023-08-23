@@ -8,9 +8,7 @@
     "after:bump": "npx auto-changelog -p"
   },
   "github": {
-    "release": true,
-    "autoGenerate":"true",
-    "tokenRef": "GHA_TOKEN"
+    "release": true
   },
   "npm": {
     "publish": false
