@@ -61,6 +61,11 @@ jobs:
     if: ${{ github.event.label.name == 'release' }}
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Code
+        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
+        with:
+          ref: ${{ github.head_ref }}
+          
       - name: Install the dependencies
         run: |
           npm install -g release-it@16.1.2
@@ -71,7 +76,7 @@ jobs:
             echo "Release Number: $release_number"
             git config user.email "v.anicicj@rasa.com"
             git config user.name "Vladimir Anicic"
-            npx release-it $release_number --yes --ci
+            npm run release $release_number --yes --ci
         env:
           GITHUB_TOKEN: ${{ secrets.GHA_TOKEN }}
           
