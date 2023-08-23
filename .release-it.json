@@ -2,7 +2,6 @@
   "git": {
     "requireBranch": "release/*",
     "commitMessage": "Release ${version}",
-    "changelog": "git log --pretty=oneline `git tag --sort=-committerdate | head -1`...`git tag --sort=-committerdate | head -2 | tail -1`",
     "requireCleanWorkingDir": true
   },
   "hooks": {
@@ -10,6 +9,7 @@
   },
   "github": {
     "release": true,
+    "releaseNotes":"git log --pretty=oneline `git tag --sort=-committerdate | head -1`...`git tag --sort=-committerdate | head -2 | tail -1`", 
     "autoGenerate": true
   },
   "npm": {
