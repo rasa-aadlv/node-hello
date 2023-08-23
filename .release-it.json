@@ -1,7 +1,6 @@
 {
   "git": {
     "requireBranch": "release/*",
-    "changelog": "npx auto-changelog --stdout --commit-limit false -u --template https://raw.githubusercontent.com/release-it/release-it/main/templates/changelog-compact.hbs",
     "commitMessage": "Release ${version}",
     "requireCleanWorkingDir": true
   },
@@ -9,9 +8,7 @@
     "after:bump": "npx auto-changelog -p"
   },
   "github": {
-    "release": true,
-    "autoGenerate": true,
-    "assets": [""]
+    "release": true
   },
   "npm": {
     "publish": false
