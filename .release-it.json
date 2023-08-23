@@ -9,8 +9,7 @@
     "after:bump": "npx auto-changelog -p"
   },
   "github": {
-    "release": true,
-    "releaseNotes": "git log --no-merges --pretty=format:\"* %s %h\" ${latestTag}...main"
+    "release": true
   },
   "npm": {
     "publish": false
