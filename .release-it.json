@@ -9,7 +9,8 @@
     "after:bump": "npx auto-changelog -p"
   },
   "github": {
-    "release": true
+    "release": true,
+    "assets": [""]
   },
   "npm": {
     "publish": false
