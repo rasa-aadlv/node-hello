@@ -9,7 +9,8 @@
   },
   "github": {
     "release": true,
-    "releaseNotes":"git log --pretty=oneline `git tag --sort=-committerdate | head -1`...`git tag --sort=-committerdate | head -2 | tail -1`"
+    "autoGenerate":"true",
+    "tokenRef": "GHA_TOKEN"
   },
   "npm": {
     "publish": false
