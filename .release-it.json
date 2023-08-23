@@ -8,7 +8,9 @@
     "after:bump": "npx auto-changelog -p"
   },
   "github": {
-    "release": true
+    "release": true,
+    "web": true,
+    "autoGenerate": true
   },
   "npm": {
     "publish": false
