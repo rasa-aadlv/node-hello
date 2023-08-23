@@ -10,6 +10,10 @@
   },
   "github": {
     "release": true,
+    releaseNotes(context) {
+      // Remove the first, redundant line with version and date.
+      return context.changelog.split('\n').slice(1).join('\n');
+    }
     "assets": [""]
   },
   "npm": {
