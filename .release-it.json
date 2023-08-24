@@ -9,7 +9,6 @@
   },
   "github": {
     "release": true,
-    "releaseNotes": "git log --pretty=oneline `git tag --sort=-committerdate | head -1`...`git tag --sort=-committerdate | head -2 | tail -1` | cut -d ' ' -f 2- | grep -v 'Merge pull request'",
     "assets": null
   },
   "npm": {
