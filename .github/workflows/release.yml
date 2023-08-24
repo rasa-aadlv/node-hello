@@ -74,9 +74,8 @@ jobs:
         run: |
             release_number=${GITHUB_HEAD_REF#release/}
             echo "Release Number: $release_number"
-            git config user.email "v.anicicj@rasa.com"
+            git config user.email "v.anicic@rasa.com"
             git config user.name "Vladimir Anicic"
-            git checkout master
             npm run release $release_number --yes --ci
         env:
           GITHUB_TOKEN: ${{ secrets.GHA_TOKEN }}
